@@ -4,7 +4,6 @@ import Form from '../components/form/Form';
 import ResultsDisplay from '../components/display/ResultsDisplay';
 import HistoryDisplay from '../components/history/HistoryDisplay';
 import { getData, postData, deleteData, updateData } from '../components/services/CrudUtils';
-import style from './container.css';
 
 export default class AppContainer extends Component {
   state = {
@@ -32,7 +31,7 @@ export default class AppContainer extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     this.setState({ loading: true });
-    const { method, url, reqBody, history } = this.state;
+    const { method, url } = this.state;
 
     if (method === 'GET') {
       const response = await getData(url);
@@ -69,22 +68,22 @@ export default class AppContainer extends Component {
   }
 
   render() {
+    const { loading } = this.state;
+    if (loading) return <h1>loading...</h1>;
     return (
-      <div className={style.mainContainer}>
+      <>
         <HistoryDisplay history={this.state.history} />
-        <div className={style.rightContainer}>
-          <Form
-            handleSumbit={this.handleSubmit}
-            method={this.state.method}
-            onMethodChange={this.handleMethodChange}
-            handleInputChange={this.handleInputChange}
-            url={this.state.url}
-            reqBody={this.state.reqBody} />
-          <ResultsDisplay
-            response={this.state.response}
-            loading={this.state.loading} />
-        </div>
-      </div>
+        <Form
+          handleSumbit={this.handleSubmit}
+          method={this.state.method}
+          onMethodChange={this.handleMethodChange}
+          handleInputChange={this.handleInputChange}
+          url={this.state.url}
+          reqBody={this.state.reqBody} />
+        <ResultsDisplay
+          response={this.state.response}
+          loading={this.state.loading} />
+      </>
     );
   }
 }

@@ -63,8 +63,13 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "agent": "^0.2.1",
+    "bootstrap": "^5.0.2",
     "react": "^17.0.2",
+    "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "super": "^0.2.3",
     "superagent": "^6.1.0"
   }
 }

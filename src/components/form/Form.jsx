@@ -3,15 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from '../form/style.css';
 
-
-function Form({
-  handleSubmit,
-  method,
-  onMethodChange,
-  handleInputChange,
-  url,
-  reqBody,
-}) {
+const Form = ({ handleSubmit, method, onMethodChange, handleInputChange, url, reqBody }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -86,9 +78,8 @@ function Form({
       </div>
     </form>
   );
-}
-
-Form.PropTypes = {
+};
+Form.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   method: PropTypes.string.isRequired,
   onMethodChange: PropTypes.func.isRequired,
