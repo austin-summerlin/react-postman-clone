@@ -7,7 +7,7 @@ function HistoryDisplay({ history }) {
   return (
     <div className={style.historyContainer}>
       <div className={style.containerTop}>
-        <p className={style.textContent}>History</p>
+        <p className={style.textContent}>previous...</p>
       </div>
       <ul aria-label="requests">
         {!!history.length && history.map((item, i) => (

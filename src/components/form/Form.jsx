@@ -9,14 +9,18 @@ const Form = ({ handleSubmit, method, onMethodChange, handleInputChange, url, re
       <div>
         <label>
           <input
-            placeholder="Enter a URL"
+            placeholder="enter a valid url"
             className={style.form}
             type="text"
             name="url"
             onChange={handleInputChange}
             value={url} />
         </label>
-        <button className={style.submitButton} aria-label="fetch-button"></button>
+        <button
+          className={style.submitButton}
+          aria-label="fetch-button">
+          submit
+        </button>
       </div>
 
       <div className={style.radioContainer}>
@@ -28,7 +32,7 @@ const Form = ({ handleSubmit, method, onMethodChange, handleInputChange, url, re
             value="GET"
             checked={method === 'GET'}
             onChange={onMethodChange} />
-          <span>GET</span>
+          <span>get</span>
         </label>
 
         <label className={style.radioLabel}>
@@ -39,7 +43,7 @@ const Form = ({ handleSubmit, method, onMethodChange, handleInputChange, url, re
             value="POST"
             checked={method === 'POST'}
             onChange={onMethodChange} />
-          <span>POST</span>
+          <span>post</span>
         </label>
 
         <label className={style.radioLabel}>
@@ -50,7 +54,7 @@ const Form = ({ handleSubmit, method, onMethodChange, handleInputChange, url, re
             value="PUT"
             checked={method === 'PUT'}
             onChange={onMethodChange} />
-          <span>PUT</span>
+          <span>put</span>
         </label>
 
         <label className={style.radioLabel}>
@@ -61,7 +65,7 @@ const Form = ({ handleSubmit, method, onMethodChange, handleInputChange, url, re
             value="DELETE"
             checked={method === 'DELETE'}
             onChange={onMethodChange} />
-          <span>DELETE</span>
+          <span>delete</span>
         </label>
       </div>
 

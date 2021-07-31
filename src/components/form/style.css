@@ -1,0 +1,18 @@
+.form{
+  background-color: rgb(237, 240, 243);
+}
+.submitButton{
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.radioLabel{
+  margin-left: 5px;
+  text-align: center;
+  display: flex;
+  align-content:center;
+  margin: 5px;
+}
+.reqBody{
+}
+
