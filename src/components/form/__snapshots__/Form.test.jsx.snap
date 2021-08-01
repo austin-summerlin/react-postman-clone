@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Component should render Form 1`] = `
+<DocumentFragment>
+  <section
+    class="form"
+  >
+    <form>
+      <input
+        name="url"
+        placeholder="URL"
+        type="text"
+        value=""
+      />
+      <section>
+        <div>
+          <input
+            id="get"
+            name="method"
+            type="radio"
+            value="GET"
+          />
+          <label
+            for="get"
+          >
+            GET
+          </label>
+          <input
+            id="post"
+            name="method"
+            type="radio"
+            value="POST"
+          />
+          <label
+            for="post"
+          >
+            POST
+          </label>
+          <input
+            id="put"
+            name="method"
+            type="radio"
+            value="PUT"
+          />
+          <label
+            for="put"
+          >
+            PUT
+          </label>
+          <input
+            id="delete"
+            name="method"
+            type="radio"
+            value="DELETE"
+          />
+          <label
+            for="delete"
+          >
+            DELETE
+          </label>
+        </div>
+        <button>
+          Go
+        </button>
+      </section>
+      <textarea
+        name="body"
+        placeholder="Raw JSON Body"
+      />
+    </form>
+  </section>
+</DocumentFragment>
+`;
