@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Form from '../components/form/Form';
 import Display from '../components/display/ResultsDisplay';
-import HistoryDisplay from '../components/history/HistoryDisplay';
+import HistoryList from '../components/history/HistoryList';
 import { fetchCall } from '../components/services/fetchCall';
 
 export default class AppContainer extends Component {
@@ -78,7 +78,7 @@ export default class AppContainer extends Component {
     return (
       <>
         <section className="container">
-          <HistoryDisplay history={history} onClick={this.handleClick} />
+          <HistoryList history={history} onClick={this.handleClick} />
           <div>
             <Form
               url={url}
