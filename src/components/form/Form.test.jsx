@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import App from './App';
+import Form from '../form/Form';
 
-describe('App component', () => {
+describe('Form Component', () => {
   afterEach(() => cleanup());
-  it('renders App', () => {
-    const { asFragment } = render(<App />);
+  it.only('should render Form', () => {
+    const { asFragment } = render(<Form />);
     expect(asFragment()).toMatchSnapshot();
   });
 });
