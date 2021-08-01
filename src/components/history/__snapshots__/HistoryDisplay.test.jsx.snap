@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`History Display Component should render History Display 1`] = `
+<DocumentFragment>
+  <article>
+    <p />
+    <span />
+  </article>
+</DocumentFragment>
+`;
