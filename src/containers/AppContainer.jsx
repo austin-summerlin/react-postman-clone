@@ -1,89 +1,97 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import Form from '../components/form/Form';
-import ResultsDisplay from '../components/display/ResultsDisplay';
+import Display from '../components/display/ResultsDisplay';
 import HistoryDisplay from '../components/history/HistoryDisplay';
-import { getData, postData, deleteData, updateData } from '../components/services/CrudUtils';
+import { fetchCall } from '../components/services/fetchCall';
 
 export default class AppContainer extends Component {
   state = {
-    loading: false,
-    method: 'GET',
     url: '',
-    response: '',
-    reqBody: '',
+    method: '',
+    body: '',
     history: [],
+    display: 'form',
   };
 
-  handleMethodChange = ({ target }) => {
-    this.setState({
-      method: target.value,
-    });
-  };
+  componentDidMount() {
+    const historyStored = JSON.parse(localStorage.getItem('history'));
 
-  handleInputChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    this.setState({ loading: true });
-    const { method, url } = this.state;
-
-    if (method === 'GET') {
-      const response = await getData(url);
-      this.setState((prevState) => ({
-        history: [...prevState.history, { method, url }],
-        response,
-        loading: false,
-      }));
-    }
-    else if (method === 'POST') {
-      const response = await postData(url);
-      this.setState((prevState) => ({
-        history: [...prevState.history, { method, url }],
-        response,
-        loading: false,
-      }));
-    }
-    else if (method === 'DELETE') {
-      const response = await deleteData(url);
-      this.setState((prevState) => ({
-        history: [...prevState.history, { method, url }],
-        response,
-        loading: false,
-      }));
-    }
-    else if (method === 'PUT') {
-      const response = await updateData(url);
-      this.setState((prevState) => ({
-        history: [...prevState.history, { method, url }],
-        response,
-        loading: false,
-      }));
+    if (historyStored) {
+      this.setState({ history: historyStored });
     }
   }
 
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  handleSubmit = (e) => {
+    const { history, url, method, body } = this.state;
+    const key = `${url}+${method}+${body}`;
+
+    e.preventDefault();
+    this.fetch();
+
+    if (history.filter(item => item.key === key).length > 0 || method === '') return;
+    this.setState(state => ({
+
+      history: [...state.history, {
+        url: state.url,
+        method: state.method,
+        body: state.body,
+        key: `${url}+${method}+${body}`
+      }]
+    }));
+
+    this.setState(state => {
+      localStorage.setItem('history', JSON.stringify(state.history));
+    });
+  };
+
+  handleClick = event => {
+    const { id } = event.target;
+    let result;
+
+    this.state.history.forEach(item => {
+      if (item.key === id) {
+        result = item;
+      }
+    });
+
+    this.setState({
+      url: result.url,
+      method: result.method,
+      body: result.body,
+    });
+  };
+
+  fetch = () => {
+    const { url, method, body } = this.state;
+    return fetchCall(url, method, body)
+      .then(res => this.setState({ display: res }));
+  };
+
   render() {
-    const { loading } = this.state;
-    if (loading) return <h1>loading...</h1>;
+    const { url, method, body, display, history } = this.state;
+
     return (
       <>
-        <HistoryDisplay history={this.state.history} />
-        <Form
-          handleSumbit={this.handleSubmit}
-          method={this.state.method}
-          onMethodChange={this.handleMethodChange}
-          handleInputChange={this.handleInputChange}
-          url={this.state.url}
-          reqBody={this.state.reqBody} />
-        <ResultsDisplay
-          response={this.state.response}
-          loading={this.state.loading} />
+        <section className="container">
+          <HistoryDisplay history={history} onClick={this.handleClick} />
+          <div>
+            <Form
+              url={url}
+              method={method}
+              body={body}
+              onChange={this.handleChange}
+              onSubmit={this.handleSubmit} />
+            <Display display={display} />
+          </div>
+        </section>
+
       </>
     );
   }
 }
+
